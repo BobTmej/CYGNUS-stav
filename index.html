@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Stav informačního systému</title>
+  <style>
+    body { font-family: sans-serif; background: #f9f9f9; padding: 2rem; max-width: 800px; margin: auto; }
+    .logo { text-align: center; margin-bottom: 1rem; }
+    h1 { text-align: center; margin-top: 0.5rem; }
+    .status { padding: 1rem; font-size: 1.2rem; background: #fff; border: 1px solid #ccc; margin-bottom: 1rem; }
+    .admin { margin-top: 2rem; border-top: 1px solid #ccc; padding-top: 1rem; }
+    .note { font-size: 0.95rem; color: #333; margin-top: 0.8rem; }
+  </style>
+</head>
+<body>
+
+<div class="logo" ondblclick="checkAdminLogin()">
+  <img src="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/48368542378/logo/g6LBraApCpAOOZtsPQglOoddY2LVLIRBAA.png" alt="Logo" style="max-height: 60px;">
+</div>
+
+<h1 style="text-align: center;">Stav informačního systému</h1>
+
+<div class="status" id="statusContainer">⏳ Načítání stavu...</div>
+
+<div class="admin" id="adminControls" style="display: none;">
+  <h3>Administrace</h3>
+  <label>Stav:
+    <select id="statusSelect">
+      <option value="OK">🟢 Systém běží</option>
+      <option value="OMEZENÍ">🟡 Probíhá plánovaná odstávka</option>
+      <option value="VÝPADEK">🔴 Výpadek systému</option>
+    </select>
+  </label>
+  <label>Poznámka k odstávce:
+    <input type="text" id="noteInput" placeholder="Např. údržba serveru" />
+  </label>
+  <label>Poznámka k výpadku:
+    <input type="text" id="outageNoteInput" placeholder="Např. výpadek sítě" />
+  </label>
+  <button onclick="submitStatus()">💾 Uložit změny</button>
+</div>
+
+<script src="script.js"></script>
+<script>
+async function displayStatus() {
+  const data = await loadStatus();
+  let html = `<p><strong>Aktuální stav:</strong> ${data.status}</p>`;
+  if (data.status === "OMEZENÍ" && data.note) {
+    html += `<p><strong>Detail:</strong> ${data.note}</p>`;
+  }
+  if (data.status === "VÝPADEK" && data.noteList.length > 0) {
+    html += "<ul>";
+    data.noteList.forEach(n => html += `<li>${n.time}: ${n.text}</li>`);
+    html += "</ul>";
+  }
+  if (data.noteTime) {
+    const t = new Date(data.noteTime);
+    t.setHours(t.getHours() - 1, 0, 0, 0);
+    html += `<p><em>Poslední aktualizace: ${t.getHours().toString().padStart(2, '0')}:00</em></p>`;
+  }
+  document.getElementById("statusContainer").innerHTML = html;
+
+  // předvyplnění formulářů
+  if (document.getElementById("statusSelect")) {
+    document.getElementById("statusSelect").value = data.status;
+    document.getElementById("noteInput").value = data.note;
+  }
+}
+
+async function submitStatus() {
+  const data = await loadStatus();
+  const newStatus = document.getElementById("statusSelect").value;
+  const note = document.getElementById("noteInput").value;
+  const outageNote = document.getElementById("outageNoteInput").value;
+
+  const updated = {
+    ...data,
+    status: newStatus,
+    note: note,
+    noteTime: new Date().toISOString()
+  };
+
+  if (newStatus === "VÝPADEK" && outageNote) {
+    updated.noteList = updated.noteList || [];
+    updated.noteList.push({ time: new Date().toLocaleString("cs-CZ"), text: outageNote });
+  }
+
+  await saveStatus(updated);
+  displayStatus();
+}
+
+displayStatus();
+</script>
+
+</body>
+</html>
