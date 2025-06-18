@@ -1,1 +1,6 @@
-{'status': 'OK', 'note': 'Např. plánovaná odstávka kvůli aktualizaci', 'noteTime': '2025-06-18T12:00:00.000Z', 'noteList': [{'time': '2025-06-18 13:45', 'text': 'Dočasný výpadek databáze'}, {'time': '2025-06-18 14:05', 'text': 'Probíhá restart serveru'}]}
+{
+  "status": "OK",
+  "note": "",
+  "noteList": [],
+  "noteTime": ""
+}
