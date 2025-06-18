@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Stav informačního systému</title>
+  <style>
+    body { font-family: sans-serif; background: #f9f9f9; padding: 2rem; max-width: 800px; margin: auto; }
+    .logo { text-align: center; margin-bottom: 1rem; }
+    h1 { text-align: center; margin-top: 0.5rem; }
+    .status { padding: 1rem; font-size: 1.2rem; background: #fff; border: 1px solid #ccc; margin-bottom: 1rem; }
+    .admin { margin-top: 2rem; border-top: 1px solid #ccc; padding-top: 1rem; }
+    label { font-weight: bold; display: block; margin-top: 1rem; }
+    select, input, button {
+      margin-top: 0.3rem; display: block; width: 100%; padding: 0.5rem; font-size: 1rem;
+    }
+    .note { font-size: 0.95rem; color: #333; margin-top: 0.8rem; }
+    .delete-btn { color: red; cursor: pointer; margin-left: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+<div class="logo" ondblclick="showLogin()">
+  <img src="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/48368542378/logo/g6LBraApCpAOOZtsPQglOoddY2LVLIRBAA.png" alt="Logo" style="max-height: 60px;">
+</div>
+<div style="text-align: center; margin-top: 0.5rem;">
+  <h1>Stav informačního systému</h1>
+</div>
+<div class="status">
+  <strong id="currentStatus"></strong>
+  <div id="statusDetails" class="note"></div>
+</div>
+<div class="admin">
+  <div id="loginSection" style="display: none; margin-top: 1rem;">
+    <label for="adminKey">Admin klíč:</label>
+    <input type="password" id="adminKey" placeholder="Zadej přístupový klíč" />
+    <button onclick="checkPassword()">✅ Přihlásit</button>
+    <div id="adminPanel" style="display:none;">
+      <label for="statusSelect">Změnit stav systému:</label>
+      <select id="statusSelect">
+        <option value="OK">🟢 Systém běží</option>
+        <option value="OMEZENÍ">🟡 Probíhá plánovaná odstávka</option>
+        <option value="VÝPADEK">🔴 Výpadek systému</option>
+      </select>
+      <div id="noteInputMaintenance" style="display: none;">
+        <label for="statusNoteInputMaintenance">Poznámka (pro plánovanou odstávku):</label>
+        <input type="text" id="statusNoteInputMaintenance" />
+      </div>
+      <div id="noteInputOutage" style="display: none;">
+        <label for="statusNoteInputOutage">Poznámka (pro výpadek):</label>
+        <input type="text" id="statusNoteInputOutage" />
+      </div>
+      <button onclick="saveStatus()">💾 Uložit změny</button>
+    </div>
+  </div>
+</div>
+<script>
+  // Skript z předchozího kroku
+</script>
+</body>
+</html>
