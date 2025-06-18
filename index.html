@@ -3,25 +3,35 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Stav systému</title>
+  <title>Stav informačního systému</title>
+  <style>
+    body { font-family: sans-serif; background: #f9f9f9; padding: 2rem; max-width: 800px; margin: auto; }
+    .logo { text-align: center; margin-bottom: 1rem; }
+    h1 { text-align: center; margin-top: 0.5rem; }
+    .status { padding: 1rem; font-size: 1.2rem; background: #fff; border: 1px solid #ccc; margin-bottom: 1rem; }
+    .note { font-size: 0.95rem; color: #333; margin-top: 0.8rem; }
+    .delete-btn { color: red; cursor: pointer; margin-left: 10px; font-weight: bold; }
+    select, input, button { margin-top: 0.5rem; display: block; width: 100%; padding: 0.5rem; font-size: 1rem; }
+  </style>
   <script src="script.js" defer></script>
 </head>
-<body onload="loadStatus().then(renderStatus)">
-  <h1>Stav informačního systému</h1>
-  <div id="statusContainer">⏳ Načítání stavu...</div>
-
-  <button onclick="checkAdminLogin()">🔐 Přihlásit jako admin</button>
-
-  <div id="adminControls" style="display:none; margin-top:1em;">
-    <p>Zde by mohl být formulář pro úpravu stavu...</p>
+<body>
+  <div class="logo" ondblclick="showLogin()">
+    <img src="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/48368542378/logo/g6LBraApCpAOOZtsPQglOoddY2LVLIRBAA.png" alt="Logo" style="max-height: 60px;">
   </div>
+  <h1>Stav informačního systému</h1>
+  <div class="status" id="statusContainer">⏳ Načítání stavu...</div>
 
-  <script>
-    function renderStatus(data) {
-      const el = document.getElementById("statusContainer");
-      el.innerHTML = `<p><strong>Aktuální stav:</strong> ${data.status}</p>`;
-      if (data.note) el.innerHTML += `<p><em>${data.note}</em></p>`;
-    }
-  </script>
+  <div id="adminPanel" style="display:none; margin-top:1em;">
+    <label for="statusSelect">Změnit stav systému:</label>
+    <select id="statusSelect">
+      <option value="OK">🟢 Systém běží</option>
+      <option value="OMEZENÍ">🟡 Probíhá plánovaná odstávka</option>
+      <option value="VÝPADEK">🔴 Výpadek systému</option>
+    </select>
+    <label for="statusNoteInput">Poznámka:</label>
+    <input type="text" id="statusNoteInput" placeholder="Zadejte poznámku..." />
+    <button onclick="saveStatus()">💾 Uložit změny</button>
+  </div>
 </body>
 </html>
