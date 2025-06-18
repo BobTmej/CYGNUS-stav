@@ -1,7 +1,7 @@
 
 const repo = "BobTmej/CYGNUS-stav";
 const branch = "main";
-const filename = "stav.json";
+const rawURL = `https://raw.githubusercontent.com/${repo}/${branch}/${filename}`;
 const rawURL = "stav.json";
 const apiURL = `https://api.github.com/repos/${repo}/contents/${filename}`;
 const adminHash = "3a3c313cfb9c88fc5ae69a9f25c4eaef186d6d6fd0e2d8a0eb1c1431c7e6df84"; // hash hesla
