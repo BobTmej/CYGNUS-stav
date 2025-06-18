@@ -1,5 +1,5 @@
 
-const repo = "iresoft-cz/stav-systemu"; // nahraďte svým repozitářem
+const repo = "BobTmej/CYGNUS-Vypadek"; // nahraďte svým repozitářem
 const branch = "main";
 const filename = "stav.json";
 const rawURL = `https://raw.githubusercontent.com/${repo}/${branch}/${filename}`;
