@@ -16,6 +16,7 @@ async function adminLogin() {
   if (data.success) {
     isAdmin = true;
     document.getElementById("adminPanel").style.display = "block";
+    document.getElementById("loginSection").style.display = "none";
     loadStatus();
   } else {
     alert("Nesprávné heslo");
