@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Stav informačního systému</title>
+  <style>
+    body { font-family: sans-serif; background: #f9f9f9; padding: 2rem; max-width: 800px; margin: auto; }
+    .logo { text-align: center; margin-bottom: 1rem; }
+    h1 { text-align: center; margin-top: 0.5rem; }
+    .status { padding: 1rem; font-size: 1.2rem; background: #fff; border: 1px solid #ccc; margin-bottom: 1rem; }
+    .note { font-size: 0.95rem; color: #333; margin-top: 0.8rem; }
+    .delete-btn { color: red; cursor: pointer; margin-left: 10px; font-weight: bold; }
+    select, input, button { margin-top: 0.5rem; display: block; width: 100%; padding: 0.5rem; font-size: 1rem; }
+  </style>
+  <script src="static/script.js" defer></script>
+</head>
+<body>
+	<div class="logo" ondblclick="showLogin()">
+		<img src="https://s3.amazonaws.com/cdn.freshdesk.com/data/helpdesk/attachments/production/48368542378/logo/g6LBraApCpAOOZtsPQglOoddY2LVLIRBAA.png" alt="Logo" style="max-height: 60px;">
+	</div>
+	<h1>Stav informačního systému</h1>
+	<div class="status" id="statusContainer">⏳ Načítání stavu...</div>
+
+	<div id="loginSection" style="display:none;">
+		<input type="password" id="adminPassword" placeholder="Zadejte heslo" />
+		<button onclick="adminLogin()">Přihlásit</button>
+  </div>
+  <div id="adminPanel" style="display:none; margin-top: 1em;">
+
+	  <div style="margin-bottom: 1em;">
+		<label for="statusSelect" style="font-weight: bold;">Změnit stav systému:</label>
+		<select id="statusSelect" onchange="onStatusChange()"; style="width: 100%; padding: 0.5em;">
+		  <option value="OK">🟢 Systém běží</option>
+		  <option value="OMEZENÍ">🟡 Probíhá plánovaná odstávka</option>
+		  <option value="VÝPADEK">🔴 Výpadek systému</option>
+		</select>
+	  </div>
+
+	  <div style="margin-bottom: 1em;">
+		<label for="noteInput" style="font-weight: bold;">Poznámka:</label>
+		<input type="text" id="noteInput" style="width: 100%; padding: 0.5em;" />
+	  </div>
+
+	  <div>
+		<button onclick="saveStatus()" style="padding: 0.6em 1.2em;">💾 Uložit</button>
+	  </div>
+
+	</div>
+</body>
+</html>
