@@ -46,7 +46,8 @@ async function loadStatus() {
 
     html += `<p>Ups, i přes veškerou péči má CYGNUS nyní slabší chvilku.</p>`;
     html += `<p><span style="color: red; font-weight: bold;">Je možné, že se vyskytla nějaká chyba, znemožňující jeho spuštění, nebo nefunguje některá jeho část.</span></p>`;
-    if (data.notes && data.notes.length > 0) {
+    html += `<p style="text-align: justify;">Ale víme o tom! Usilovně pracujeme na odstranění potíží. Prosíme o strpení, naše péče se nyní maximálně soustředí na znovuspuštění CYGNUSu. Jakmile budeme vědět, napíšeme na toto místo, o jakou potíž se jedná a předpokládaný čas spuštění tak, aby Vám mohl CYGNUS opět maximálně sloužit.</p>`;
+	if (data.notes && data.notes.length > 0) {
       html += "<ul>";
     
       data.notes.forEach((n, i) => {
@@ -56,11 +57,11 @@ async function loadStatus() {
       });
       html += "</ul>";
     
-    }
-    if (!hasNotes) {
+    }    
+    
+	if (!hasNotes) {
       html += `<p><em>Pracujeme na upřesnění detailních informací.</em></p>`;
     }
-    html += `<p style="text-align: justify;">Ale víme o tom! Usilovně pracujeme na odstranění potíží. Prosíme o strpení, naše péče se nyní maximálně soustředí na znovuspuštění CYGNUSu. Jakmile budeme vědět, napíšeme na toto místo, o jakou potíž se jedná a předpokládaný čas spuštění tak, aby Vám mohl CYGNUS opět maximálně sloužit.</p>`;
   }
 
   html += `<p style='margin-top:1rem;'><a href='' onclick='location.reload(); return false;'>🔁 Zde klikněte pro aktualizaci informací na této stránce</a></p>`;
