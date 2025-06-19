@@ -10,7 +10,7 @@
     .status { padding: 1rem; font-size: 1.2rem; background: #fff; border: 1px solid #ccc; margin-bottom: 1rem; }
     .note { font-size: 0.95rem; color: #333; margin-top: 0.8rem; }
     .delete-btn { color: red; cursor: pointer; margin-left: 10px; font-weight: bold; }
-    select, input, button { margin-top: 0.5rem; display: block; width: 100%; padding: 0.5rem; font-size: 1rem; }
+    select, input, button { margin-top: 0.5rem; display: block; width: 100%; padding: 0.5rem; font-size: 1rem; box-sizing: border-box; }
   </style>
   <script src="static/script.js" defer></script>
 </head>
@@ -22,7 +22,7 @@
 	<div class="status" id="statusContainer">⏳ Načítání stavu...</div>
 
 	<div id="loginSection" style="display:none;">
-		<input type="password" id="adminPassword" placeholder="Zadejte heslo" />
+		<input type="password" id="adminPassword" placeholder="Zadejte heslo" style="width: 100%; padding: 0.5em; font-size: 1rem;" />
 		<button onclick="adminLogin()">Přihlásit</button>
   </div>
   <div id="adminPanel" style="display:none; margin-top: 1em;">
