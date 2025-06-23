@@ -1,3 +1,4 @@
+tzdata
 flask
 bcrypt
 gunicorn
