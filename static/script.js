@@ -16,7 +16,7 @@ async function adminLogin() {
   if (data.success) {
     isAdmin = true;
     document.getElementById("adminPanel").style.display = "block";
-    document.getElementById("loginSection").style.display = "none";
+	document.getElementById("loginSection").style.display = "none";
     loadStatus();
   } else {
     alert("Nesprávné heslo");
@@ -34,7 +34,6 @@ async function loadStatus() {
     html += `<p><span style="color: green; font-weight: bold;">POTVRZUJEME, že CYGNUS je v bezvadné kondici. Všechny jeho funkce jsou v pořádku!</span></p>`;
     html += `<p><strong>Pokud přesto máte potíže se spuštěním nebo připojením k CYGNUSu, vyzkoušejte následující:</strong></p>`;
     html += `<ol style="margin-left: 1.5em;">`;
-    html += `<li style="margin-bottom: 0.6em;">Zkontrolujte, zdali Vám funguje Vaše internetové připojení. Například tak, že zkusíte otevřít nějakou internetovou stránku.</li>`;
     html += `<li style="margin-bottom: 0.6em;">Zkuste vypnout a znovu zapnout CYGNUS.</li>`;
     html += `<li>Zkuste restartovat počítač a poté znovu spustit CYGNUS.</li>`;
     html += `</ol>`;
